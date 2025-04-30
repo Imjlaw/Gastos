@@ -9,7 +9,11 @@ from google.cloud import firestore_v1
 
 # Configuração do Firebase
 if not firebase_admin._apps:
-    cred = credentials.Certificate("firebase-key.json")
+    cred = credentials.Certificate({
+    "type": st.secrets["FIREBASE_TYPE"],
+    "project_id": st.secrets["FIREBASE_PROJECT_ID"],
+    # ... (todos os campos do seu JSON)
+})
     firebase_admin.initialize_app(cred)
 
 db = firestore.client()
